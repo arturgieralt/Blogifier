@@ -1,19 +1,20 @@
 ﻿@using Blogifier.Core.Data
 @inject IDataService DataService
+@using Askmethat.Aspnet.JsonLocalizer.Localizer
 @{
-    AppSettings.SiteRoot = Url.Content("~/");
-    var img = $"{AppSettings.SiteRoot}themes/main/images";
-    var imgPlaceholder = $"{AppSettings.SiteRoot}admin/img/img-placeholder.png";
-    var m = Model as ListModel;
-    var pgr = m.Pager;
+    ListModel listModel = (ListModel)Model;
+    Pager pgr = listModel.Pager;
+    string root = Url.Content("~/");
+    string cover = $"{root}{listModel.Blog.Cover}";
+    var catsUnordered = await DataService.BlogPosts.Categories();
+    var cats = catsUnordered.OrderByDescending(c => c.PostCount);
 
-    var coverPost = m.Posts.Where(p => p.Featured == false).FirstOrDefault();
-    if(coverPost == null)
-    {
-        coverPost = m.Posts.FirstOrDefault();
-    }
-    var featured = DataService.BlogPosts.GetList(new Pager(1), 0, "", "F").Result.ToList(); // flist.ToList();
+    var posts = await DataService.BlogPosts.GetList(p => p.Published > DateTime.MinValue, new Pager(1));
+    var flist = await DataService.BlogPosts.GetList(new Pager(1), 0, "", "F");
+    var featured = flist.ToList();
+    var popular = await DataService.BlogPosts.GetPopular(new Pager(1, 4));
 }
+@inject IJsonStringLocalizer<ListModel> Localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,84 +30,59 @@
             <div class="row">
                 <div class="col-lg-8 col-md-6">
                     <div class="row">
-                        <div class="col-lg-6 col-12 mb-4 pb-2">
-                            <div class="blog-post rounded shadow">
-                                <img src="~/themes/main/images/blog/01.jpg" class="img-fluid rounded-top" alt="">
-                                <div class="content pt-4 pb-4 p-3">
-                                    <ul class="list-unstyled d-flex justify-content-between post-meta">
-                                        <li><i data-feather="user" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Samuel</a></li> 
-                                        <li><i data-feather="tag" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Branding</a></li>                                    
-                                    </ul> 
-                                    <h5 class="mb-3"><a href="page-blog-detail.html" class="title text-dark">Our Home Entertainment has Evolved Significantly</a> </h5>
-                                    <ul class="list-unstyled mb-0 pt-3 border-top d-flex justify-content-between">
-                                        <li><a href="javascript:void(0)" class="text-dark">Read More <i data-feather="chevron-right" class="fea icon-sm"></i></a></li>
-                                        <li><i class="mdi mdi-calendar-edit mr-1"></i>10th April, 2020</li>
-                                    </ul>
-                                </div><!--end content-->
-                            </div><!--end blog post-->
-                        </div><!--end col-->
-    
-                        <div class="col-lg-6 col-12 mb-4 pb-2">
-                            <div class="blog-post rounded shadow">
-                                <img src="~/themes/main/images/blog/02.jpg" class="img-fluid rounded-top" alt="">
-                                <div class="content pt-4 pb-4 p-3">
-                                    <ul class="list-unstyled d-flex justify-content-between post-meta">
-                                        <li><i data-feather="user" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Samuel</a></li> 
-                                        <li><i data-feather="tag" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Branding</a></li>                                    
-                                    </ul> 
-                                    <h5 class="mb-3"><a href="page-blog-detail.html" class="title text-dark">These Are The Voyages of The Starship Enterprise</a></h5>
-                                    <ul class="list-unstyled mb-0 pt-3 border-top d-flex justify-content-between">
-                                        <li><a href="javascript:void(0)" class="text-dark">Read More <i data-feather="chevron-right" class="fea icon-sm"></i></a></li>
-                                        <li><i class="mdi mdi-calendar-edit mr-1"></i>10th April, 2020</li>
-                                    </ul>
-                                </div><!--end content-->
-                            </div><!--end blog post-->
-                        </div><!--end col-->
-    
-                        <div class="col-lg-6 col-12 mb-4 pb-2">
-                            <div class="blog-post rounded shadow">
-                                <img src="~/themes/main/images/blog/03.jpg" class="img-fluid rounded-top" alt="">
-                                <div class="content pt-4 pb-4 p-3">
-                                    <ul class="list-unstyled d-flex justify-content-between post-meta">
-                                        <li><i data-feather="user" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Samuel</a></li> 
-                                        <li><i data-feather="tag" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Branding</a></li>                                    
-                                    </ul> 
-                                    <h5 class="mb-3"><a href="page-blog-detail.html" class="title text-dark">Three Reasons Visibility Matters in Supply Chain</a></h5>
-                                    <ul class="list-unstyled mb-0 pt-3 border-top d-flex justify-content-between">
-                                        <li><a href="javascript:void(0)" class="text-dark">Read More <i data-feather="chevron-right" class="fea icon-sm"></i></a></li>
-                                        <li><i class="mdi mdi-calendar-edit mr-1"></i>10th April, 2020</li>
-                                    </ul>
-                                </div><!--end content-->
-                            </div><!--end blog post-->
-                        </div><!--end col-->
-    
-                        <div class="col-lg-6 col-12 mb-4 pb-2">
-                            <div class="blog-post rounded shadow">
-                                <img src="~/themes/main/images/blog/04.jpg" class="img-fluid rounded-top" alt="">
-                                <div class="content pt-4 pb-4 p-3">
-                                    <ul class="list-unstyled d-flex justify-content-between post-meta">
-                                        <li><i data-feather="user" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Samuel</a></li> 
-                                        <li><i data-feather="tag" class="fea icon-sm mr-1"></i><a href="javascript:void(0)" class="text-dark">Branding</a></li>                                    
-                                    </ul> 
-                                    <h5 class="mb-3"><a href="page-blog-detail.html" class="title text-dark">Our Home Entertainment has Evolved Significantly</a> </h5>
-                                    <ul class="list-unstyled mb-0 pt-3 border-top d-flex justify-content-between">
-                                        <li><a href="javascript:void(0)" class="text-dark">Read More <i data-feather="chevron-right" class="fea icon-sm"></i></a></li>
-                                        <li><i class="mdi mdi-calendar-edit mr-1"></i>10th April, 2020</li>
-                                    </ul>
-                                </div><!--end content-->
-                            </div><!--end blog post-->
-                        </div><!--end col-->
-    
+                        @if (listModel.Posts.Count() > 0)
+                        {
+                            @foreach (var post in listModel.Posts)
+                            {
+                            <div class="col-lg-12 col-12 mb-4 pb-2">
+                                <div class="blog-post rounded shadow">
+                                    <img src="~/@post.Cover.ToThumb()" onerror="this.onerror=null;this.src='@root@post.Cover';" alt="@post.Title" class="img-fluid rounded-top">
+                                    <div class="content pt-4 pb-4 p-3">
+                                        <ul class="list-unstyled d-flex justify-content-between post-meta">
+                                            <li><i class="mdi mdi-calendar-edit mr-1"></i>@post.Published.ToFriendlyDateString()</li>
+                                            <li><span><i class="mdi mdi-eye-outline mr-1" aria-hidden="true"></i> @post.PostViews</span>
+                                                <span>
+                                                        <i class="mdi mdi-comment-outline mr-1" aria-hidden="true"></i>
+                                                        <a href="posts/@post.Slug#disqus_thread"></a>
+                                                    </span></li>                
+                                        </ul> 
+                                        <h5 class="mb-3"><a href="posts/@post.Slug" class="title text-dark">@post.Title</a> </h5>
+                                        <p class="mb-2">@Html.Raw(post.Description)</p>
+                                        <ul class="list-unstyled mb-0 pt-3 border-top d-flex justify-content-between">
+                                            <li><a href="posts/@post.Slug" class="text-dark">Read More <i data-feather="chevron-right" class="fea icon-sm"></i></a></li>
+                                            <li>
+                                            @if (!string.IsNullOrEmpty(post.Categories))
+                                                {
+                                                    foreach (var cat in post.Categories.Split(',').ToList())
+                                                    {
+                                                        <span class="mr-1"><i data-feather="tag" class="fea icon-sm mr-1"></i><a href="~/categories/@cat" class="text-dark">@cat</a></span>   
+                                                    }
+                                                } 
+                                            </li>  
+                                        </ul>
+                                    </div><!--end content-->
+                                </div><!--end blog post-->
+                             </div><!--end col-->
+                            }
+                        }
                         <!-- PAGINATION START -->
+                        @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
+                        {
                         <div class="col-12">                                
                             <ul class="pagination justify-content-center mb-0 list-unstyled">
-                                <li><a href="#" class="pr-3 pl-3 pt-2 pb-2"> Previous</a></li>
-                                <li class="active"><a href="#" class="pr-3 pl-3 pt-2 pb-2">1</a></li>
-                                <li><a href="#" class="pr-3 pl-3 pt-2 pb-2">2</a></li>
-                                <li><a href="#" class="pr-3 pl-3 pt-2 pb-2">3</a></li>
-                                <li><a href="#" class="pr-3 pl-3 pt-2 pb-2">Next </a></li>
-                            </ul><!--end pagination-->
-                        </div><!--end col-->
+                                @if (pgr.ShowOlder)
+                                {
+                                    <li><a href="@pgr.LinkToOlder" class="pr-3 pl-3 pt-2 pb-2"> Previous</a></li>
+                                }
+                                <li class="active"><span class="pr-3 pl-3 pt-2 pb-2">@pgr.CurrentPage</span></li>
+                                    
+                                @if (pgr.ShowNewer)
+                                {
+                                    <li><a class="pr-3 pl-3 pt-2 pb-2" href="@pgr.LinkToNewer">Next</a></li>
+                                }
+                            </ul>
+                        </div>
+                        }
                         <!-- PAGINATION END -->
                     </div><!--end row-->
                 </div><!--end col-->
@@ -138,9 +114,9 @@
                             <div class="p-4 rounded shadow">
                                 <h6 class="widget-title font-weight-bold pt-2 pb-2 bg-light rounded text-center">Search</h6>
                                 <div id="search2" class="widget-search mt-4 mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
+                                    <form role="search" method="get" id="searchform" class="searchform" asp-controller="Blog" asp-action="Search" method="post">
                                         <div>
-                                            <input type="text" class="border rounded" name="s" id="s" placeholder="Search Keywords...">
+                                            <input type="text" class="border rounded" value="" id="term" name="term" placeholder="Search Keywords...">
                                             <input type="submit" id="searchsubmit" value="Search">
                                         </div>
                                     </form>
@@ -149,37 +125,19 @@
                         </div>
                         <!-- SEARCH -->
 
-                        <!-- CATAGORIES -->
-                        <div class="widget mt-4 pt-2">
-                            <div class="p-4 rounded shadow">
-                                <h6 class="widget-title font-weight-bold pt-2 pb-2 bg-light rounded text-center">Catagories</h6>
-                                <ul class="list-unstyled mt-4 mb-0 catagories">
-                                    <li class="d-flex justify-content-between"><a href="jvascript:void(0)">Finance</a> <span>13</span></li>
-                                    <li class="d-flex justify-content-between"><a href="jvascript:void(0)">Business</a> <span>09</span></li>
-                                    <li class="d-flex justify-content-between"><a href="jvascript:void(0)">Blog</a> <span>18</span></li>
-                                    <li class="d-flex justify-content-between"><a href="jvascript:void(0)">Corporate</a> <span>20</span></li>
-                                    <li class="d-flex justify-content-between"><a href="jvascript:void(0)">Investment</a> <span>22</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- CATAGORIES -->
-
                         <!-- TAG CLOUDS -->
                         <div class="widget mt-4 pt-2 text-center">
                             <div class="p-4 rounded shadow">
                                 <h6 class="widget-title font-weight-bold pt-2 pb-2 bg-light rounded">Tags Cloud</h6>
+                                @if(cats.Any())
+                                {
                                 <div class="tagcloud mt-4">
-                                    <a href="jvascript:void(0)" class="rounded">Business</a>
-                                    <a href="jvascript:void(0)" class="rounded">Finance</a>
-                                    <a href="jvascript:void(0)" class="rounded">Marketing</a>
-                                    <a href="jvascript:void(0)" class="rounded">Fashion</a>
-                                    <a href="jvascript:void(0)" class="rounded">Bride</a>
-                                    <a href="jvascript:void(0)" class="rounded">Lifestyle</a>
-                                    <a href="jvascript:void(0)" class="rounded">Travel</a>
-                                    <a href="jvascript:void(0)" class="rounded">Beauty</a>
-                                    <a href="jvascript:void(0)" class="rounded">Video</a>
-                                    <a href="jvascript:void(0)" class="rounded">Audio</a>
+                                    @foreach (var category in cats)
+                                    {
+                                         <a href="~/categories/@category.Category" class="rounded">@category.Category (@category.PostCount)</a>
+                                    }
                                 </div>
+                                }
                             </div>
                         </div>
                         <!-- TAG CLOUDS -->
