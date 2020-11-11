@@ -31,10 +31,9 @@
                             <li class="list-inline-item"><i class="mdi mdi-calendar-edit mr-1"></i><span class="text-muted">@postModel.Post.Published.ToFriendlyDateString()</span> </li>
                         </ul>
                         <ul class="page-next bg-light d-inline-block py-2 px-4 mt-3 rounded mb-0">
-                            <li><a href="~/" class="text-dark">AGWebDev</a></li>
-                            <li><a href="~/" class="text-dark">Blog</a></li> 
+                            <li><a href="~/" class="text-dark">Main</a></li>
                             <li>
-                                <span class="text-primary"> Blog Detail</span> 
+                                <span class="text-primary">Post</span> 
                             </li> 
                         </ul>
                     </div>
@@ -50,34 +49,45 @@
                 <!-- BLog Start -->
                     <div class="blog position-relative overflow-hidden shadow rounded">
                         <div class="content p-4">
-                            <h6 class="font-weight-normal">
-                            @if (cats != null)
-                                {
-                                    foreach (var cat in cats)
-                                    {
-                                        <i class="mdi mdi-tag text-primary mr-1"></i><a href="~/categories/@cat" class="text-primary">@cat</a> 
-                                    }
-                                }
-                            </h6>
                             @Html.Raw(postModel.Post.Content)
-                            <div class="post-meta mt-3">
-                                <ul class="list-unstyled mb-0">
-                                    <li class="list-inline-item float-right">
-                                        <ul class="list-unstyled">
-                                            <li class="list-inline-item">Share :</li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted"><i class="mdi mdi-facebook"></i></a></li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted"><i class="mdi mdi-instagram"></i></a></li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted"><i class="mdi mdi-twitter"></i></a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="content p-4">
+                            <h6 class="font-weight-normal">
+                                @if (cats != null)
+                                    {
+                                        foreach (var cat in cats)
+                                        {
+                                            <i class="mdi mdi-tag text-primary mr-1"></i><a href="~/categories/@cat" class="text-primary">@cat</a> 
+                                        }
+                                    }
+                            </h6>
                         </div>
                     </div>
                 <!-- BLog End -->
             </div><!--end row-->
         </div><!--end container-->
     </section>
+    <div id="disqus_thread" class="container"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://agwebdev-net.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
     <!-- Blog -->
     <partial name="~/Views/Themes/Main/Shared/Footer.cshtml" />
 </body>
