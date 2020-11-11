@@ -6,17 +6,43 @@
     if (Model.ToString().EndsWith("PostModel"))
     {
         PostModel postModel = (PostModel)Model;
-    <title>@postModel.Post.Title &amp; @postModel.Blog.Title</title>
+    <title>AG Web Dev - @postModel.Post.Title</title>
     <meta name="author" content="@postModel.Post.Author.DisplayName">
     <meta name="description" content="@postModel.Post.Description.StripHtml()">
     <link rel="canonical" href="@absoluteUrl/posts/@postModel.Post.Slug" />
+    <link rel="alternate" type="application/rss+xml" title="@Model.Blog.Title" href="@absoluteUrl/feed/rss" />
     }
-    else
+    else if(Model.ToString().EndsWith("ListModel"))
     {
         ListModel listModel = (ListModel)Model;
-    <title>@listModel.Blog.Title</title>
+    <title>AG Web Dev - blog about fullstack web development </title>
     <meta name="description" content="@listModel.Blog.Description">
-    }
     <link rel="alternate" type="application/rss+xml" title="@Model.Blog.Title" href="@absoluteUrl/feed/rss" />
+    } 
+    else
+    {
+        SinglePageModel pageModel = (SinglePageModel)Model;
+    <title>@pageModel.Title</title>
+    }
 }
-@Html.Raw(Model.Blog.HeaderScript)
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal blog, resume and portolio of Artur Gieralt. If you are interested in web programming, you are in the right place." />
+<meta name="keywords" content="web, dev, development, programming, c#, .net, java, python, design, patterns, javascript, react, angular, vue, js, portfolio, resume, blog, blogging, refactoring" />
+<meta content="Artur Gieralt" name="author" />
+<!-- favicon -->
+<link rel="shortcut icon" href="~/themes/main/images/favicon.ico">
+<!-- Bootstrap -->
+<link href="~/themes/main/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- Magnific -->
+<link href="~/themes/main/css/magnific-popup.css" rel="stylesheet" type="text/css" />
+<!-- Icon -->
+<link href="~/themes/main/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+            
+<!-- SLICK SLIDER -->
+<link rel="stylesheet" href="~/themes/main/css/owl.carousel.min.css"/> 
+<link rel="stylesheet" href="~/themes/main/css/owl.theme.css"/> 
+<link rel="stylesheet" ntohref="~/themes/main/css/owl.transitions.css"/>    
+<!-- Custom Css -->
+<link href="~/themes/main/css/style.css" rel="stylesheet" type="text/css" id="theme-opt" />
+<link href="~/themes/main/css/colors/default.css" rel="stylesheet" id="color-opt">

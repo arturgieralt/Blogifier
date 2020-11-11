@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blogifier.Models
 {
+    public class SinglePageModel {
+        public string Title { get; set;}
+        public BlogItem Blog { get; set; }
+    }
+
     public class PostModel
     {
         public BlogItem Blog { get; set; }

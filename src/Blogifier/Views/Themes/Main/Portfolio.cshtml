@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="~/Views/Shared/HeaderScript.cshtml" />
+</head>
+
+<body>
+    <partial name="~/Views/Themes/Main/Shared/Header.cshtml" />
+    <!-- Home Start -->
+    <section class="bg-half d-table w-100" style='background: center center url(@Url.Content("~/themes/main/images/home/bg-pages2.jpg"));'>
+        <div class="container">
+            <div class="row mt-5 justify-content-center">
+                <div class="col-lg-12 text-center">
+                    <div class="page-next-level">
+                        <h4 class="title">Portfolio</h4>
+                        <ul class="page-next bg-light d-inline-block py-2 px-4 mt-3 rounded mb-0">
+                            <li><a href="~/" class="text-dark">Main</a></li>
+                            <li>
+                                <span class="text-primary">Portfolio</span> 
+                            </li> 
+                        </ul>
+                    </div>
+                </div>  <!--end col-->
+            </div><!--end row-->
+        </div> <!--end container-->
+    </section><!--end section-->
+    <!-- Home End -->
+
+            <!-- Projects End -->
+        <section class="section">
+            <div class="container">
+                <div class="portfolioContainer row">
+                    <div class="col-lg-6 col-md-6 mt-4 pt-2 natural personal">
+                        <div class="portfolio-box rounded position-relative overflow-hidden">
+                            <div class="portfolio-box-img position-relative overflow-hidden">
+                                <img src="~/themes/main/images/portfolio/kyc.jpg" class="img-fluid" alt="member-image">
+                                <div class="overlay-work">
+                                    <div class="work-content text-center">
+                                        <a href="https://www.katarzyna-yarmaliuk.pl/" class="text-light work-icon bg-dark d-inline-block rounded-pill mfp-image"><i class="mdi mdi-forward"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallary-title py-4 text-center">
+                                <h5><a href="https://www.katarzyna-yarmaliuk.pl/" class="title text-dark">katarzyna-yarmaliuk.pl</a></h5>
+                                <span>Dentist home page</span>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!-- End row -->
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- Contact End -->
+
+    <partial name="~/Views/Themes/Main/Shared/Footer.cshtml" />
+</body>
+</html>

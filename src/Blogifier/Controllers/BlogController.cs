@@ -1,6 +1,5 @@
 ﻿using Blogifier.Core;
 using Blogifier.Core.Data;
-using Blogifier.Core.Helpers;
 using Blogifier.Core.Services;
 using Blogifier.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -67,6 +66,17 @@ namespace Blogifier.Controllers
             }
 
             return View($"~/Views/Themes/{blog.Theme}/List.cshtml", model);
+        }
+
+[       HttpGet("portfolio")]
+        public async Task<IActionResult> Portfolio()
+        {               
+            var blog = await DataService.CustomFields.GetBlogSettings();
+
+            return View($"~/Views/Themes/{blog.Theme}/Portfolio.cshtml", new SinglePageModel(){
+                Title = "AG Web Dev - my portfolio",
+                Blog = blog
+            });
         }
 
         [HttpGet("categories/{name}")]
