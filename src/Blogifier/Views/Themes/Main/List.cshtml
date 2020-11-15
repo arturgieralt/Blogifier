@@ -32,7 +32,7 @@
                         <h4 class="title">Blog about web development</h4>
                         <ul class="page-next bg-light d-inline-block py-2 px-4 mt-3 rounded mb-0">
                             <li>
-                                <span class="text-primary">Main</span> 
+                                <span class="text-primary">Home</span> 
                             </li> 
                         </ul>
                     </div>
@@ -81,6 +81,14 @@
                                 </div><!--end blog post-->
                              </div><!--end col-->
                             }
+                        } 
+                        else 
+                        {
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <h4>No posts found.</h4>
+                                </div>
+                            </div>
                         }
                         <!-- PAGINATION START -->
                         @if (pgr != null && (pgr.ShowOlder || pgr.ShowNewer))
@@ -112,13 +120,13 @@
                             <div class="p-4 rounded shadow">
                                 <h6 class="widget-title font-weight-bold pt-2 pb-2 bg-light rounded text-center">Author</h6>
                                 <div class="text-center author mt-4">
-                                    <img src="~/themes/main/images/home/ag.png" class="avatar avatar-md shadow border mx-auto rounded-circle" alt="">
+                                        <a href="/resume"><img src="~/themes/main/images/home/ag.png" class="avatar avatar-md shadow border mx-auto rounded-circle" alt="" /></a>
                                     <div class="mt-4">
                                         <h6>Artur Gierałt</h6>
                                         <small>Fullstack developer</small>
                                         <ul class="list-unstyled social-icon social mt-4 mb-0">
-                                            <li class="list-inline-item"><a href="jvascript:void(0)" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
-                                            <li class="list-inline-item"><a href="jvascript:void(0)" class="rounded"><i class="mdi mdi-gmail"></i></a></li>
+                                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/gieraltartur/" target="_blank" rel="noopener noreferrer" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
+                                            <li class="list-inline-item"><a href="mailto:&#97;&#103;&#119;&#101;&#98;&#100;&#101;&#118;&#46;&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" class="rounded"><i class="mdi mdi-gmail"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -79,6 +79,18 @@ namespace Blogifier.Controllers
             });
         }
 
+
+[       HttpGet("resume")]
+        public async Task<IActionResult> Resume()
+        {               
+            var blog = await DataService.CustomFields.GetBlogSettings();
+
+            return View($"~/Views/Themes/{blog.Theme}/Resume.cshtml", new SinglePageModel(){
+                Title = "AG Web Dev - few words about me",
+                Blog = blog
+            });
+        }
+
         [HttpGet("categories/{name}")]
         public async Task<IActionResult> Categories(string name, int page = 1)
         {
