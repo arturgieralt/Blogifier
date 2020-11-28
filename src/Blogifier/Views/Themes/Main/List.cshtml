@@ -57,11 +57,7 @@
                                     <div class="content pt-4 pb-4 p-3">
                                         <ul class="list-unstyled d-flex justify-content-between post-meta">
                                             <li><i class="mdi mdi-calendar-edit mr-1"></i>@post.Published.ToFriendlyDateString()</li>
-                                            <li><span><i class="mdi mdi-eye-outline mr-1" aria-hidden="true"></i> @post.PostViews</span>
-                                                <span>
-                                                        <i class="mdi mdi-comment-outline mr-1" aria-hidden="true"></i>
-                                                        <a href="~/posts/@post.Slug#disqus_thread"></a>
-                                                    </span></li>                
+                                            <li><span><i class="mdi mdi-eye-outline mr-1" aria-hidden="true"></i> @post.PostViews</span></li>                
                                         </ul> 
                                         <h5 class="mb-3"><a href="posts/@post.Slug" class="title text-dark">@post.Title</a> </h5>
                                         <p class="mb-2">@Html.Raw(post.Description)</p>

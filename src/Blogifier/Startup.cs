@@ -78,7 +78,8 @@ namespace Blogifier
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-
+            
+            app.UseHttpsRedirection();
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseRequestLocalization();
